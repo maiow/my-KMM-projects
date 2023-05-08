@@ -3,13 +3,14 @@ plugins {
     id("com.android.library")
     id("com.louiscad.complete-kotlin")
     kotlin("plugin.serialization") version "1.8.21"
+    id("com.squareup.sqldelight")
 }
 
 kotlin {
     android {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "1.8"
             }
         }
     }
@@ -23,16 +24,22 @@ kotlin {
             baseName = "shared"
         }
     }
-
+    val coroutinesVersion = "1.7.0"
     val ktorVersion = "2.3.0"
+    val sqlDelightVersion = "1.5.5"
+   // val dateTimeVersion = "0.4.0"
+    val klockVersion = "2.4.13"
 
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                //implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+                implementation("com.soywiz.korlibs.klock:klock:$klockVersion")
             }
         }
         val commonTest by getting {
@@ -43,6 +50,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
         val androidUnitTest by getting
@@ -56,6 +64,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
         val iosX64Test by getting
@@ -71,7 +80,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mivanovskaya.ktorkmm"
+    namespace = "KtorKMM"
     compileSdk = 33
     defaultConfig {
         minSdk = 21
