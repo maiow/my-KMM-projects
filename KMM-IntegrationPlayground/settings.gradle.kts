@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 rootProject.name = "Simple login"
 include("app")
 include(":shared")
-include(":shared")
