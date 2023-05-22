@@ -40,6 +40,8 @@ kotlin {
                 implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
                 //implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
                 implementation("com.soywiz.korlibs.klock:klock:$klockVersion")
+                //for SharedPrefs
+                implementation("com.russhwolf:multiplatform-settings-no-arg:1.0.0")
             }
         }
         val commonTest by getting {
