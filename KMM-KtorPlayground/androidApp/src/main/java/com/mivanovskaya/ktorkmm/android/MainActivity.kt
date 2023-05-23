@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mivanovskaya.ktorkmm.Greeting
 
 import androidx.compose.runtime.*
+import com.mivanovskaya.ktorkmm.appContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
                     var text by remember { mutableStateOf("Loading") }
                     LaunchedEffect(true) {
                         text = try {
+                            appContext = applicationContext
                             Greeting().greet()
                         } catch (e: Exception) {
                             e.localizedMessage ?: "error"

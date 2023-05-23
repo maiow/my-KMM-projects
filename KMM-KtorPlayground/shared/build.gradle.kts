@@ -76,6 +76,15 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
+        val shared by creating {
+            dependencies {
+                //key-value storage
+                implementation("com.russhwolf:multiplatform-settings:1.0.0")
+            }
+            androidMain.dependsOn(this)
+            iosMain.dependsOn(this)
+            commonMain.dependsOn(this)
+        }
     }
 }
 
